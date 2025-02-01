@@ -90,8 +90,8 @@ public class GradeBook
 	@Override
 	public String toString() {
 		String output = "";
-		for (double score : scores)
-			output += score + " ";
-		return output;
+		for (int i = 0; i < scoresSize; i++)
+			output += scores[i] + " ";
+		return output.trim();
 	}
 }
