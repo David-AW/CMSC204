@@ -1,0 +1,59 @@
+boolean isValidPassword​(String password) 	
+
+
+ArrayList getInvalidPasswords​(ArrayList passwords)
+	ArrayList temp
+	String reason
+	for password in passwords do
+		try{
+			if isValidPassword(password)
+				continue (skip to next password)
+		}multiple catches{
+			reason = "Some reason based on exception"
+		}
+		temp.add(password + " " + reason)
+	end loop
+	return temp
+
+boolean hasDigit​(String password)
+	Loop through chars in string until a char of 0x30 -> 0x39 is found
+	if yes then
+		return true
+	else
+		throw NoDigitException
+
+boolean hasLowerAlpha​(String password)
+	Loop through chars in string until a char of 0x61 -> 0x7A is found
+	if yes then
+		return true
+	else
+		throw NoLowerAlphaException
+
+boolean hasSpecialChar​(String password)
+	Use Pattern and Matcher objects to determine that there is evidence of a character in the string that is not alphanumeric
+	if has a non-alphanumeric then
+		return true
+	else
+		throw NoSpecialCharacterException
+
+boolean hasUpperAlpha​(String password)
+	Loop through chars in string until a char of 0x41 -> 0x5A is found
+	if yes then
+		return true
+	else
+		throw NoUpperAlphaException
+
+boolean isWeakPassword​(String password) 	
+
+
+boolean NoSameCharInSequence​(String password)
+	char a = 0x00 // null chars
+	char b = 0x00
+	for char c in password.getCharacters do
+		if a == b == c then
+			throw InvalidSequenceException
+		a = b
+		b = c
+	end loop
+	return false
+
