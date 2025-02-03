@@ -14,10 +14,24 @@ public class PasswordCheckerUtility {
 		return true;
 	}
 	
+	public static boolean isWeakPassword(String password) throws WeakPasswordException {
+		try {
+			isValidPassword(password);
+			if (!hasBetweenSixAndNineChars(password))
+				return false;
+		} catch (Exception e) {}
+
+		throw new WeakPasswordException();
+	}
+	
 	public static boolean isValidLength​(String password) throws LengthException {
 		if (password.length() >= 6)
 			return true;
 		throw new LengthException();
+	}
+	
+	public static boolean hasBetweenSixAndNineChars(String password) {
+		return password.length() >= 6 && password.length() <= 9;
 	}
 	
 	public static boolean hasUpperAlpha(String password) throws NoUpperAlphaException {
