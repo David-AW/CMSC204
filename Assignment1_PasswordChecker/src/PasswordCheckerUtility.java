@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class PasswordCheckerUtility {
@@ -29,6 +30,24 @@ public class PasswordCheckerUtility {
 		hasSpecialChar(password);
 		NoSameCharInSequence(password);
 		return true;
+	}
+	
+	/**
+	 * Checks a list of passwords and returns a list of invalid passwords with reasons
+	 * @param passwords list of passwords to check
+	 * @return list of invalid passwords
+	 */
+	public static ArrayList<String> getInvalidPasswords(ArrayList<String> passwords){
+		ArrayList<String> invalid_passwords = new ArrayList<String>();
+		for (String password : passwords) {
+			try {
+				isValidPassword(password);
+			} catch (LengthException | NoUpperAlphaException | NoLowerAlphaException | NoDigitException
+					| NoSpecialCharacterException | InvalidSequenceException e) {
+				invalid_passwords.add(password + " " + e.getMessage());
+			}
+		}
+		return invalid_passwords;
 	}
 	
 	/**
