@@ -136,4 +136,25 @@ public class PasswordCheckerUtility {
 		return false;
 	}
 	
+	/**
+	 * Compare equality of two passwords
+	 * @param password password string to be checked for
+	 * @param password_confirm string to be checked against password for
+	 * @throws UnmatchedException thrown if not same (case sensitive)
+	 */
+	public static void comparePasswords(String password, String password_confirm) throws UnmatchedException {
+		if (!password_confirm.equals(password))
+			throw new UnmatchedException();
+	}
+	
+	/**
+	 * Compare equality of two passwords
+	 * @param password password string to be checked for
+	 * @param password_confirm string to be checked against password for
+	 * @return true if both same (case sensitive), false otherwise
+	 */
+	public static boolean comparePasswordsWithReturn(String password, String password_confirm) {
+		return password_confirm.equals(password);
+	}
+	
 }
