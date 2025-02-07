@@ -136,7 +136,18 @@ public class PasswordCheckerTest_STUDENT {
 	@Test
 	public void testIsValidPasswordNoDigit()
 	{
-		fail("Not implemented by student yet");
+		try {
+			assertTrue(PasswordCheckerUtility.hasDigit(passwords.get(0)));
+		} catch (NoDigitException e) {
+			fail("Digit check failed the valid password test");
+		}
+		
+		try {
+			PasswordCheckerUtility.hasDigit(passwords.get(3)); // Should throw an exception
+			fail("Digit check failed to throw an exception.");
+		}catch(NoDigitException e) {
+			assertTrue(true);
+		}
 	}
 
 	/**
