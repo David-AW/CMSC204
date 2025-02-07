@@ -115,7 +115,18 @@ public class PasswordCheckerTest_STUDENT {
 	@Test
 	public void testIsValidPasswordInvalidSequence()
 	{
-		fail("Not implemented by student yet");
+		try {
+			assertFalse(PasswordCheckerUtility.NoSameCharInSequence(passwords.get(0)));
+		} catch (InvalidSequenceException e) {
+			fail("Invalid sequence check failed the valid password test");
+		}
+		
+		try {
+			PasswordCheckerUtility.NoSameCharInSequence(passwords.get(7)); // Should throw an exception
+			fail("Invalid sequence check failed to throw an exception.");
+		}catch(InvalidSequenceException e) {
+			assertTrue(true);
+		}
 	}
 
 	/**
