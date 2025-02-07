@@ -64,7 +64,18 @@ public class PasswordCheckerTest_STUDENT {
 	@Test
 	public void testIsValidPasswordNoUpperAlpha()
 	{
-		fail("Not implemented by student yet");
+		try {
+			assertTrue(PasswordCheckerUtility.hasUpperAlpha(passwords.get(0)));
+		} catch (NoUpperAlphaException e) {
+			fail("Uppercase letter check failed the valid password test");
+		}
+		
+		try {
+			PasswordCheckerUtility.hasUpperAlpha(passwords.get(4)); // Should throw an exception
+			fail("Uppercase letter check failed to throw an exception.");
+		}catch(NoUpperAlphaException e) {
+			assertTrue(true);
+		}
 	}
 
 	/**
