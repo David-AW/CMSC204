@@ -42,7 +42,13 @@ public class PasswordCheckerTest_STUDENT {
 	@Test
 	public void testIsValidPasswordTooShort()
 	{
-		fail("Not implemented by student yet");
+		try {
+			assertTrue(PasswordCheckerUtility.isValidLength​(passwords.get(0)));
+			PasswordCheckerUtility.isValidLength​(passwords.get(2)); // Should throw an exception
+			fail("Password length check failed to throw an exception.");
+		}catch(LengthException e) {
+			assertTrue(true);
+		}
 	}
 
 	/**
