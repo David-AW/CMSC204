@@ -17,7 +17,8 @@ import org.junit.Test;
 public class PasswordCheckerTest_STUDENT {
 
 	ArrayList<String> passwords;
-
+	final int WEAK = 0, STRONG = 1, SHORT = 2, NO_NUMBER = 3, NO_UPPER = 4, NO_LOWER = 5, NO_SPECIAL = 6, INVALID_SEQ = 7;
+	
 	@Before
 	public void setUp() throws Exception {
 		passwords = new ArrayList<String>();
@@ -44,13 +45,13 @@ public class PasswordCheckerTest_STUDENT {
 	public void testIsValidPasswordTooShort()
 	{
 		try {
-			assertTrue(PasswordCheckerUtility.isValidLength​(passwords.get(0)));
+			assertTrue(PasswordCheckerUtility.isValidLength​(passwords.get(WEAK)));
 		} catch (LengthException e) {
 			fail("Password length check failed the valid password test");
 		}
 		
 		try {
-			PasswordCheckerUtility.isValidLength​(passwords.get(2)); // Should throw an exception
+			PasswordCheckerUtility.isValidLength​(passwords.get(SHORT)); // Should throw an exception
 			fail("Password length check failed to throw an exception.");
 		}catch(LengthException e) {
 			assertTrue(true);
@@ -65,13 +66,13 @@ public class PasswordCheckerTest_STUDENT {
 	public void testIsValidPasswordNoUpperAlpha()
 	{
 		try {
-			assertTrue(PasswordCheckerUtility.hasUpperAlpha(passwords.get(0)));
+			assertTrue(PasswordCheckerUtility.hasUpperAlpha(passwords.get(WEAK)));
 		} catch (NoUpperAlphaException e) {
 			fail("Uppercase letter check failed the valid password test");
 		}
 		
 		try {
-			PasswordCheckerUtility.hasUpperAlpha(passwords.get(4)); // Should throw an exception
+			PasswordCheckerUtility.hasUpperAlpha(passwords.get(NO_UPPER)); // Should throw an exception
 			fail("Uppercase letter check failed to throw an exception.");
 		}catch(NoUpperAlphaException e) {
 			assertTrue(true);
@@ -86,13 +87,13 @@ public class PasswordCheckerTest_STUDENT {
 	public void testIsValidPasswordNoLowerAlpha()
 	{
 		try {
-			assertTrue(PasswordCheckerUtility.hasLowerAlpha(passwords.get(0)));
+			assertTrue(PasswordCheckerUtility.hasLowerAlpha(passwords.get(WEAK)));
 		} catch (NoLowerAlphaException e) {
 			fail("Lowercase letter check failed the valid password test");
 		}
 		
 		try {
-			PasswordCheckerUtility.hasLowerAlpha(passwords.get(5)); // Should throw an exception
+			PasswordCheckerUtility.hasLowerAlpha(passwords.get(NO_LOWER)); // Should throw an exception
 			fail("Lowercase letter check failed to throw an exception.");
 		}catch(NoLowerAlphaException e) {
 			assertTrue(true);
@@ -106,14 +107,14 @@ public class PasswordCheckerTest_STUDENT {
 	public void testIsWeakPassword()
 	{
 		try {
-			PasswordCheckerUtility.isWeakPassword(passwords.get(0));
+			PasswordCheckerUtility.isWeakPassword(passwords.get(WEAK));
 			fail("Weak password failed to throw an exception");
 		} catch (WeakPasswordException e) {
 			assertTrue(true);
 		}
 		
 		try {
-			assertFalse(PasswordCheckerUtility.isWeakPassword(passwords.get(1)));
+			assertFalse(PasswordCheckerUtility.isWeakPassword(passwords.get(STRONG)));
 		} catch (WeakPasswordException e) {
 			fail("Strong valid password threw a weak password exception");
 		}
@@ -127,13 +128,13 @@ public class PasswordCheckerTest_STUDENT {
 	public void testIsValidPasswordInvalidSequence()
 	{
 		try {
-			assertFalse(PasswordCheckerUtility.NoSameCharInSequence(passwords.get(0)));
+			assertFalse(PasswordCheckerUtility.NoSameCharInSequence(passwords.get(WEAK)));
 		} catch (InvalidSequenceException e) {
 			fail("Invalid sequence check failed the valid password test");
 		}
 		
 		try {
-			PasswordCheckerUtility.NoSameCharInSequence(passwords.get(7)); // Should throw an exception
+			PasswordCheckerUtility.NoSameCharInSequence(passwords.get(INVALID_SEQ)); // Should throw an exception
 			fail("Invalid sequence check failed to throw an exception.");
 		}catch(InvalidSequenceException e) {
 			assertTrue(true);
@@ -148,13 +149,13 @@ public class PasswordCheckerTest_STUDENT {
 	public void testIsValidPasswordNoDigit()
 	{
 		try {
-			assertTrue(PasswordCheckerUtility.hasDigit(passwords.get(0)));
+			assertTrue(PasswordCheckerUtility.hasDigit(passwords.get(WEAK)));
 		} catch (NoDigitException e) {
 			fail("Digit check failed the valid password test");
 		}
 		
 		try {
-			PasswordCheckerUtility.hasDigit(passwords.get(3)); // Should throw an exception
+			PasswordCheckerUtility.hasDigit(passwords.get(NO_NUMBER)); // Should throw an exception
 			fail("Digit check failed to throw an exception.");
 		}catch(NoDigitException e) {
 			assertTrue(true);
@@ -169,13 +170,13 @@ public class PasswordCheckerTest_STUDENT {
 	public void testIsValidPasswordSuccessful()
 	{
 		try {
-			assertTrue(PasswordCheckerUtility.isValidPassword(passwords.get(0)));
+			assertTrue(PasswordCheckerUtility.isValidPassword(passwords.get(WEAK)));
 		} catch (Exception e) {
 			fail("Weak but valid password failed the valid password test");
 		}
 		
 		try {
-			assertTrue(PasswordCheckerUtility.isValidPassword(passwords.get(1)));
+			assertTrue(PasswordCheckerUtility.isValidPassword(passwords.get(STRONG)));
 		} catch (Exception e) {
 			fail("Strong valid password failed the valid password test");
 		}
