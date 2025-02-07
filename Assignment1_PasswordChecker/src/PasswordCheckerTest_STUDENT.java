@@ -69,7 +69,18 @@ public class PasswordCheckerTest_STUDENT {
 	@Test
 	public void testIsValidPasswordNoLowerAlpha()
 	{
-		fail("Not implemented by student yet");
+		try {
+			assertTrue(PasswordCheckerUtility.hasLowerAlpha(passwords.get(0)));
+		} catch (NoLowerAlphaException e) {
+			fail("Lowercase letter check failed the valid password test");
+		}
+		
+		try {
+			PasswordCheckerUtility.hasLowerAlpha(passwords.get(5)); // Should throw an exception
+			fail("Lowercase letter check failed to throw an exception.");
+		}catch(NoLowerAlphaException e) {
+			assertTrue(true);
+		}
 	}
 	/**
 	 * Test if the password has more than 2 of the same character in sequence
