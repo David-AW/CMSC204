@@ -105,7 +105,18 @@ public class PasswordCheckerTest_STUDENT {
 	@Test
 	public void testIsWeakPassword()
 	{
-		fail("Not implemented by student yet");
+		try {
+			PasswordCheckerUtility.isWeakPassword(passwords.get(0));
+			fail("Weak password failed to throw an exception");
+		} catch (WeakPasswordException e) {
+			assertTrue(true);
+		}
+		
+		try {
+			assertFalse(PasswordCheckerUtility.isWeakPassword(passwords.get(1)));
+		} catch (WeakPasswordException e) {
+			fail("Strong valid password threw a weak password exception");
+		}
 	}
 
 	/**
