@@ -188,7 +188,15 @@ public class PasswordCheckerTest_STUDENT {
 	 */
 	@Test
 	public void testInvalidPasswords() {
-		fail("Not implemented by student yet");
+		ArrayList<String> invalid_passwords = PasswordCheckerUtility.getInvalidPasswords(passwords);
+		if (invalid_passwords.size() < 6)
+			fail("At least one invalid password made it through the valid password test");
+		assertEquals(passwords.get(SHORT) + " The password must be at least 6 characters long", invalid_passwords.get(0));
+		assertEquals(passwords.get(NO_NUMBER) + " The password must contain at least one digit", invalid_passwords.get(1));
+		assertEquals(passwords.get(NO_UPPER) + " The password must contain at least one uppercase alphabetic character", invalid_passwords.get(2));
+		assertEquals(passwords.get(NO_LOWER) + " The password must contain at least one lowercase alphabetic character", invalid_passwords.get(3));
+		assertEquals(passwords.get(NO_SPECIAL) + " The password must contain at least one special character", invalid_passwords.get(4));
+		assertEquals(passwords.get(INVALID_SEQ) + " The password cannot contain more than two of the same character in sequence", invalid_passwords.get(5));
 	}
 
 }
