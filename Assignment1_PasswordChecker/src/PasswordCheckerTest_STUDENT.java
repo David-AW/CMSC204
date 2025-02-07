@@ -20,6 +20,7 @@ public class PasswordCheckerTest_STUDENT {
 
 	@Before
 	public void setUp() throws Exception {
+		passwords = new ArrayList<String>();
 		passwords.add("A1b#234");		// 0 Valid But Weak
 		passwords.add("A1b#234!@#a");	// 1 Valid and Strong
 		passwords.add("12345");			// 2 Too short
