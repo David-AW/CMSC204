@@ -1,10 +1,10 @@
 /**
    Computes the average of a set of data values.
 */
-public class DataSetGen
+public class DataSetGen <E extends Measurable>
 {
    private double sum;
-   private Measurable maximum;
+   private E maximum;
    private int count;
 
    /**
@@ -21,7 +21,7 @@ public class DataSetGen
       Adds a data value to the data set.
       @param x a data value
    */
-   public void add(Measurable x)
+   public void add(E x)
    {
       sum = sum + x.getMeasure();
       if (count == 0 || maximum.getMeasure() < x.getMeasure())
@@ -43,7 +43,7 @@ public class DataSetGen
       Gets the largest of the added data.
       @return the maximum or 0 if no data has been added
    */
-   public Measurable getMaximum()
+   public E getMaximum()
    {
       return maximum;
    }
