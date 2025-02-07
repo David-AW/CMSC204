@@ -11,19 +11,28 @@ import org.junit.Test;
 
 /**
  * STUDENT tests for the methods of PasswordChecker
- * @author 
+ * @author David Wery
  *
  */
 public class PasswordCheckerTest_STUDENT {
 
+	ArrayList<String> passwords;
+
 	@Before
 	public void setUp() throws Exception {
-		
+		passwords.add("A1b#234");		// 0 Valid But Weak
+		passwords.add("A1b#234!@#a");	// 1 Valid and Strong
+		passwords.add("12345");			// 2 Too short
+		passwords.add("abcd!FGH");		// 3 No Number
+		passwords.add("12345a!!");		// 4 No Uppercase Letter
+		passwords.add("12345#AB");		// 5 No Lowercase Letter
+		passwords.add("12345abcD"); 	// 6 No Special Character
+		passwords.add("aaaB@123");		// 7 More than 2 of the same character in a row
 	}
 
 	@After
 	public void tearDown() throws Exception {
-	
+		passwords = null;
 	}
 
 	/**
@@ -35,7 +44,7 @@ public class PasswordCheckerTest_STUDENT {
 	{
 		fail("Not implemented by student yet");
 	}
-	
+
 	/**
 	 * Test if the password has at least one uppercase alpha character
 	 * This test should throw a NoUpperAlphaException for second case
@@ -45,7 +54,7 @@ public class PasswordCheckerTest_STUDENT {
 	{
 		fail("Not implemented by student yet");
 	}
-	
+
 	/**
 	 * Test if the password has at least one lowercase alpha character
 	 * This test should throw a NoLowerAlphaException for second case
@@ -64,7 +73,7 @@ public class PasswordCheckerTest_STUDENT {
 	{
 		fail("Not implemented by student yet");
 	}
-	
+
 	/**
 	 * Test if the password has more than 2 of the same character in sequence
 	 * This test should throw a InvalidSequenceException for second case
@@ -74,7 +83,7 @@ public class PasswordCheckerTest_STUDENT {
 	{
 		fail("Not implemented by student yet");
 	}
-	
+
 	/**
 	 * Test if the password has at least one digit
 	 * One test should throw a NoDigitException
@@ -84,7 +93,7 @@ public class PasswordCheckerTest_STUDENT {
 	{
 		fail("Not implemented by student yet");
 	}
-	
+
 	/**
 	 * Test correct passwords
 	 * This test should not throw an exception
@@ -94,7 +103,7 @@ public class PasswordCheckerTest_STUDENT {
 	{
 		fail("Not implemented by student yet");
 	}
-	
+
 	/**
 	 * Test the invalidPasswords method
 	 * Check the results of the ArrayList of Strings returned by the validPasswords method
@@ -103,5 +112,5 @@ public class PasswordCheckerTest_STUDENT {
 	public void testInvalidPasswords() {
 		fail("Not implemented by student yet");
 	}
-	
+
 }
