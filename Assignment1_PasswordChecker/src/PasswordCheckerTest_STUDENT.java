@@ -45,6 +45,11 @@ public class PasswordCheckerTest_STUDENT {
 	{
 		try {
 			assertTrue(PasswordCheckerUtility.isValidLength​(passwords.get(0)));
+		} catch (LengthException e) {
+			fail("Password length check failed the valid password test");
+		}
+		
+		try {
 			PasswordCheckerUtility.isValidLength​(passwords.get(2)); // Should throw an exception
 			fail("Password length check failed to throw an exception.");
 		}catch(LengthException e) {
