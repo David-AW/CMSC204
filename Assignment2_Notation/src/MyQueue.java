@@ -4,6 +4,9 @@ public class MyQueue<T> implements QueueInterface<T>{
 
 	Object[] storage;
 	
+	int start = 0;
+	int next = 0;
+	
 	public MyQueue() {
 		this(16);
 	}
@@ -32,20 +35,17 @@ public class MyQueue<T> implements QueueInterface<T>{
 	
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return start == next;
 	}
 
 	@Override
 	public boolean isFull() {
-		// TODO Auto-generated method stub
-		return false;
+		return size() >= storage.length;
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return next-start;
 	}
 
 	@Override
