@@ -17,8 +17,10 @@ public class MyQueue<T> implements QueueInterface<T>{
 	
 	@Override
 	public boolean enqueue(T e) throws QueueOverflowException {
-		// TODO Auto-generated method stub
-		return false;
+		if (isFull())
+			throw new QueueOverflowException();
+		storage[next++ % storage.length] = e;
+		return true;
 	}
 	
 	@Override
