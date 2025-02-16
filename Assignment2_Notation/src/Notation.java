@@ -38,23 +38,45 @@ public class Notation {
 	 */
 	public static String convertInfixToPostfix(String infix) throws InvalidNotationFormatException {
 		MyStack<Character> stack = new MyStack<Character>(infix.length());
-		MyQueue<String> queue = new MyQueue<String>(infix.length());
+		MyQueue<Character> queue = new MyQueue<Character>(infix.length());
 		
 		for (char c : infix.toCharArray()) {
 			if (c == ' ')
 				continue;
 			
 			if (isOperand(c))
-				queue.enqueue(c+"");
+				queue.enqueue(c);
 			
 			if (c == '(')
 				stack.push(c);
 			
 			if (isOperator(c)) {
-				
+				int rank = getOperatorRank(c);
+				while (!stack.isEmpty() && getOperatorRank(stack.top()) >= rank)
+					queue.enqueue(stack.pop());
+				stack.push(c);
+			}
+			
+			if (c == ')') {
+				try {
+					while(getOperatorRank(stack.top()) >= 0)
+						queue.enqueue(stack.pop());
+				}catch(StackUnderflowException e) {
+					throw new InvalidNotationFormatException();
+				}
+				stack.pop(); // This should be a left parenthesis discarded
 			}
 		}
-		return null;
+		
+		while (!stack.isEmpty())
+			queue.enqueue(stack.pop());
+		
+		String postfix = "";
+		
+		while (!queue.isEmpty())
+			postfix += queue.dequeue();
+		
+		return postfix;
 	}
 	
 	/**
