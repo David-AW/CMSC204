@@ -62,9 +62,9 @@ public class MyStack<T> implements StackInterface<T>{
 	@Override
 	public String toString(String delimiter) {
 		String temp = "";
-		for (int i = 0; i < storage.length; i++) {
+		for (int i = 0; i < next; i++) {
 			temp += storage[i].toString();
-			if (i < storage.length-1)
+			if (i < next-1)
 				temp += delimiter;
 		}
 		return temp;
