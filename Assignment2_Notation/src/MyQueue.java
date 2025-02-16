@@ -25,8 +25,15 @@ public class MyQueue<T> implements QueueInterface<T>{
 	
 	@Override
 	public T dequeue() throws QueueUnderflowException {
-		// TODO Auto-generated method stub
-		return null;
+		if (isEmpty())
+			throw new QueueUnderflowException();
+		T temp = (T) storage[start++];
+		// This is to avoid the inevitable possibility of running out of bits in the integer
+		if (start >= storage.length) {
+			next -= start;
+			start = 0;
+		}
+		return temp;
 	}
 	
 	@Override
