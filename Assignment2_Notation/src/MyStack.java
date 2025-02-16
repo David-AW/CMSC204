@@ -49,8 +49,9 @@ public class MyStack<T> implements StackInterface<T>{
 
 	@Override
 	public T top() throws StackUnderflowException {
-		// TODO Auto-generated method stub
-		return null;
+		if (isEmpty())
+			throw new StackUnderflowException();
+		return (T) storage[next-1];
 	}
 
 	@Override
