@@ -71,12 +71,7 @@ public class Notation {
 		while (!stack.isEmpty())
 			queue.enqueue(stack.pop());
 		
-		String postfix = "";
-		
-		while (!queue.isEmpty())
-			postfix += queue.dequeue();
-		
-		return postfix;
+		return queue.toString();
 	}
 	
 	/**
