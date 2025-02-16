@@ -30,8 +30,11 @@ public class MyStack<T> implements StackInterface<T>{
 	
 	@Override
 	public void fill(ArrayList<T> list) {
-		// TODO Auto-generated method stub
-		
+		for (T item : list) {
+			if (isFull())
+				break;
+			push(item);
+		}
 	}
 	
 	@Override
