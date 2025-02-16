@@ -36,14 +36,12 @@ public class MyStack<T> implements StackInterface<T>{
 	
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return next <= 0;
 	}
 
 	@Override
 	public boolean isFull() {
-		// TODO Auto-generated method stub
-		return false;
+		return next >= storage.length;
 	}
 
 	@Override
@@ -54,8 +52,7 @@ public class MyStack<T> implements StackInterface<T>{
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return next;
 	}
 
 	@Override
