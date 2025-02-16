@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class MyStack<T> implements StackInterface<T>{
 
 	Object[] storage;
+	int next = 0;
 	
 	public MyStack() {
 		this(16);
@@ -14,14 +15,17 @@ public class MyStack<T> implements StackInterface<T>{
 	
 	@Override
 	public boolean push(T e) throws StackOverflowException {
-		// TODO Auto-generated method stub
-		return false;
+		if (isFull())
+			throw new StackOverflowException();
+		storage[next++] = e;
+		return true;
 	}
 	
 	@Override
 	public T pop() throws StackUnderflowException {
-		// TODO Auto-generated method stub
-		return null;
+		if (isEmpty())
+			throw new StackUnderflowException();
+		return (T) storage[--next];
 	}
 	
 	@Override
