@@ -17,11 +17,15 @@ public class Notation {
 				stack.push(c+"");
 			
 			if (isOperator(c)) {
-				String first = stack.pop();
-				String second = stack.pop();
-				if (!isOperand(first) || !isOperand(second))
+				String a;
+				String b;
+				try {
+					b = stack.pop();
+					a = stack.pop();
+				}catch (StackUnderflowException e) {
 					throw new InvalidNotationFormatException();
-				stack.push('(' + second + c + first + ')');
+				}
+				stack.push('(' + a + c + b + ')');
 			}
 		}
 		String infix = stack.pop();
