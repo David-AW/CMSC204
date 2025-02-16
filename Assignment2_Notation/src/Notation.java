@@ -68,7 +68,16 @@ public class Notation {
 		return 0;
 	}
 	
-	
+	/**
+	 * Gets rank of an operator (higher value = more priority) based on rules of PEMDAS
+	 * @param operator character to evaluate
+	 * @return rank of character in terms of operator priority (non-operators return -1)
+	 */
+	private static int getOperatorRank(char operator) {
+		if (!isOperator(operator))
+			return -1;
+		return (operator == '*' || operator == '/') ? 1 : 0;
+	}
 	
 	/**
 	 * Evaluates a character to be an operator character
