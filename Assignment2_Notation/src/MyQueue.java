@@ -50,8 +50,13 @@ public class MyQueue<T> implements QueueInterface<T>{
 
 	@Override
 	public String toString(String delimiter) {
-		// TODO Auto-generated method stub
-		return null;
+		String temp = "";
+		for (int i = start; i < next; i++) {
+			temp += storage[i%storage.length].toString();
+			if (i < next-1)
+				temp += delimiter;
+		}
+		return temp;
 	}
 	
 }
