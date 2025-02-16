@@ -61,8 +61,13 @@ public class MyStack<T> implements StackInterface<T>{
 
 	@Override
 	public String toString(String delimiter) {
-		// TODO Auto-generated method stub
-		return null;
+		String temp = "";
+		for (int i = 0; i < storage.length; i++) {
+			temp += storage[i].toString();
+			if (i < storage.length-1)
+				temp += delimiter;
+		}
+		return temp;
 	}
 
 }
