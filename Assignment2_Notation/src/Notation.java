@@ -8,7 +8,7 @@ public class Notation {
 	 * @throws InvalidNotationFormatException if the postfix expression format is invalid
 	 */
 	public static String convertPostfixToInfix(String postfix) throws InvalidNotationFormatException{
-		MyStack<String> stack = new MyStack<String>();
+		MyStack<String> stack = new MyStack<String>(postfix.length());
 		for (char c : postfix.toCharArray()) {
 			if (c == ' ')
 				continue;
@@ -37,7 +37,23 @@ public class Notation {
 	 * @throws InvalidNotationFormatException if the infix expression format is invalid
 	 */
 	public static String convertInfixToPostfix(String infix) throws InvalidNotationFormatException {
+		MyStack<Character> stack = new MyStack<Character>(infix.length());
+		MyQueue<String> queue = new MyQueue<String>(infix.length());
 		
+		for (char c : infix.toCharArray()) {
+			if (c == ' ')
+				continue;
+			
+			if (isOperand(c))
+				queue.enqueue(c+"");
+			
+			if (c == '(')
+				stack.push(c);
+			
+			if (isOperator(c)) {
+				
+			}
+		}
 		return null;
 	}
 	
@@ -47,10 +63,12 @@ public class Notation {
 	 * @return the evaluation of the postfix expression as a double
 	 * @throws InvalidNotationFormatException if the postfix expression format is invalid
 	 */
-	public static double evaluatePostfixExpression​(String postfix) throws InvalidNotationFormatException {
+	public static double evaluatePostfixExpression(String postfix) throws InvalidNotationFormatException {
 		
 		return 0;
 	}
+	
+	
 	
 	/**
 	 * Evaluates a character to be an operator character
