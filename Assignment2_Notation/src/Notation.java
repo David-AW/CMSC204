@@ -81,7 +81,23 @@ public class Notation {
 	 * @throws InvalidNotationFormatException if the postfix expression format is invalid
 	 */
 	public static double evaluatePostfixExpression(String postfix) throws InvalidNotationFormatException {
+		MyStack<Character> stack = new MyStack<Character>();
+		double value = 0;
 		
+		for (char c : postfix.toCharArray()) {
+			if (c == ' ')
+				continue;
+			
+			if (c == '(' || isOperand(c))
+				stack.push(c);
+			
+			if (isOperator(c)) {
+				char first = stack.pop();
+				char second = stack.pop();
+				if (!isOperand(first) || !isOperand(second))
+					throw new InvalidNotationFormatException();
+			}
+		}
 		return 0;
 	}
 	
@@ -117,7 +133,7 @@ public class Notation {
 	/**
 	 * Evaluates a string representation of a character to be a numeric digit
 	 * @param s string representation of a character
-	 * @return true if string is a single character of a numeric digit; false if string is not 1 character long, null, or not numeric
+	 * @return true if string is a single character of a numeric digit; false if string is not 1 character, null, or not numeric
 	 */
 	private static boolean isOperand(String s) {
 		if (s == null || s.length() != 1)
