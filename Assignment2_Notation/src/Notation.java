@@ -52,16 +52,31 @@ public class Notation {
 		return 0;
 	}
 	
+	/**
+	 * Evaluates a character to be an operator character
+	 * @param c character to evaluate
+	 * @return true if the character is a plus, minus, multiply, or division character; false if not
+	 */
 	private static boolean isOperator(char c) {
 		return c == '+' || c == '-' || c == '*' || c == '/';
 	}
 	
+	/**
+	 * Evaluates a character to be a numeric digit
+	 * @param c character to evaluate
+	 * @return true if character is a numeric digit; false if not
+	 */
 	private static boolean isOperand(char c) {
 		return c >= '0' && c <= '9';
 	}
 	
+	/**
+	 * Evaluates a string representation of a character to be a numeric digit
+	 * @param s string representation of a character
+	 * @return true if string is a single character of a numeric digit; false if string is not 1 character long, null, or not numeric
+	 */
 	private static boolean isOperand(String s) {
-		if (s.length() > 1)
+		if (s == null || s.length() != 1)
 			return false;
 		char c = s.charAt(0);
 		return c >= '0' && c <= '9';
