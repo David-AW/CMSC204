@@ -21,7 +21,7 @@ public class Notation {
 				String second = stack.pop();
 				if (!isOperand(first) || !isOperand(second))
 					throw new InvalidNotationFormatException();
-				stack.push('(' + first + c + second + ')');
+				stack.push('(' + second + c + first + ')');
 			}
 		}
 		String infix = stack.pop();
@@ -81,24 +81,41 @@ public class Notation {
 	 * @throws InvalidNotationFormatException if the postfix expression format is invalid
 	 */
 	public static double evaluatePostfixExpression(String postfix) throws InvalidNotationFormatException {
-		MyStack<Character> stack = new MyStack<Character>();
-		double value = 0;
+		MyStack<Double> stack = new MyStack<Double>();
 		
-		for (char c : postfix.toCharArray()) {
+		for (char c : postfix.toCharArray()) {			
 			if (c == ' ')
 				continue;
-			
-			if (c == '(' || isOperand(c))
-				stack.push(c);
+
+			if (isOperand(c))
+				stack.push(Double.parseDouble(c+""));
 			
 			if (isOperator(c)) {
-				char first = stack.pop();
-				char second = stack.pop();
-				if (!isOperand(first) || !isOperand(second))
+				double a, b;
+				
+				try {
+					b = stack.pop();
+					a = stack.pop();
+				}catch(StackUnderflowException e) {
 					throw new InvalidNotationFormatException();
+				}
+				
+				if (c == '+')
+					stack.push(a+b);
+				else if(c == '-')
+					stack.push(a-b);
+				else if(c == '*')
+					stack.push(a*b);
+				else if(c == '/')
+					stack.push(a/b);
 			}
 		}
-		return 0;
+		
+		double value = stack.pop();
+		if (!stack.isEmpty())
+			throw new InvalidNotationFormatException();
+
+		return value;
 	}
 	
 	/**
