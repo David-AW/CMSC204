@@ -59,4 +59,9 @@ public class MyQueue<T> implements QueueInterface<T>{
 		return temp;
 	}
 	
+	@Override
+	public String toString() {
+		return toString("");
+	}
+	
 }

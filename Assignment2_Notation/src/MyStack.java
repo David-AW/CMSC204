@@ -70,4 +70,9 @@ public class MyStack<T> implements StackInterface<T>{
 		return temp;
 	}
 
+	@Override
+	public String toString() {
+		return toString("");
+	}
+	
 }
