@@ -24,6 +24,9 @@ public class MyStackTest {
 		stringS.push(c);
 		
 		//STUDENT: add setup for doubleS for student tests
+		doubleS = new MyStack<Double>(3);
+		doubleS.push(0.5);
+		doubleS.push(3.1);
 	}
 
 	@AfterEach
@@ -69,8 +72,16 @@ public class MyStackTest {
 
 	@Test
 	public void testPopStudent() {
-		//Use the doubleQ for student tests
-		fail("Not yet implemented");
+		doubleS.pop();
+		doubleS.pop();
+		assertTrue(doubleS.isEmpty());
+		try {
+			doubleS.pop();
+		}catch(StackUnderflowException e) {
+			assertTrue(true);
+		}catch(Exception e) {
+			assertTrue("MyStack failed to throw StackUnderflowException when removing while empty", false);
+		}
 	}
 	
 	@Test
@@ -115,8 +126,15 @@ public class MyStackTest {
 
 	@Test
 	public void testPushStudent() {
-		//Use the doubleQ for student tests
-		fail("Not yet implemented");
+		doubleS.push(1.25);
+		assertTrue(doubleS.isFull());
+		try {
+			doubleS.push(1.0);
+		}catch(StackOverflowException e) {
+			assertTrue(true);
+		}catch(Exception e) {
+			assertTrue("MyStack failed to throw StackOverflowException when adding while full", false);
+		}
 	}
 	
 	@Test
@@ -130,8 +148,10 @@ public class MyStackTest {
 
 	@Test
 	public void testToStringStudent() {
-		//Use the doubleQ for student tests
-		fail("Not yet implemented");
+		assertEquals("0.5, 3.1", doubleS.toString(", "));
+		doubleS.push(5.0);
+		assertEquals("0.5, 3.1, 5.0", doubleS.toString(", "));
+		assertEquals("0.53.15.0", doubleS.toString());
 	}
 	
 	@Test
