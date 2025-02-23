@@ -24,6 +24,9 @@ public class MyQueueTest {
 		stringQ.enqueue(c);
 		
 		//STUDENT: add setup for doubleQ for student tests
+		doubleQ = new MyQueue<Double>(3);
+		doubleQ.enqueue(192.1);
+		doubleQ.enqueue(68.1);
 	}
 
 	@AfterEach
@@ -61,8 +64,16 @@ public class MyQueueTest {
 	
 	@Test
 	public void testDequeueStudent() {
-		//Use the doubleQ for student tests
-		fail("Not yet implemented");
+		doubleQ.dequeue();
+		doubleQ.dequeue();
+		assertTrue(doubleQ.isEmpty());
+		try {
+			doubleQ.dequeue();
+		}catch(QueueUnderflowException e) {
+			assertTrue(true);
+		}catch(Exception e) {
+			assertTrue("MyQueue failed to throw QueueUnderflowException after dequeuing an empty queue", false);
+		}
 	}
 
 	@Test
@@ -97,8 +108,15 @@ public class MyQueueTest {
 
 	@Test
 	public void testEnqueueStudent() {
-		//Use the doubleQ for student tests
-		fail("Not yet implemented");
+		doubleQ.enqueue(1.121);
+		assertTrue(doubleQ.isFull());
+		try {
+			doubleQ.enqueue(9.9);
+		}catch(QueueOverflowException e) {
+			assertTrue(true);
+		}catch(Exception e) {
+			assertTrue("MyQueue failed to throw QueueOverflowException after enqueuing a full queue", false);
+		}
 	}
 
 	@Test
@@ -120,8 +138,10 @@ public class MyQueueTest {
 	
 	@Test
 	public void testToStringStudent() {
-		//Use the doubleQ for student tests
-		fail("Not yet implemented");
+		assertEquals("192.1, 68.1", doubleQ.toString(", "));
+		doubleQ.enqueue(1.1);
+		assertEquals("192.1, 68.1, 1.1", doubleQ.toString(", "));
+		assertEquals("192.168.11.1", doubleQ.toString());
 	}
 
 	@Test
