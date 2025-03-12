@@ -91,7 +91,7 @@ public class BasicDoubleLinkedList<T> implements Iterable<T>{
 		ArrayList<T> array = new ArrayList<T>();
 		Node current_node = head;
 		while (current_node != null) {
-			
+			array.add(current_node.data);
 			current_node = current_node.next;
 		}
 		return array;
