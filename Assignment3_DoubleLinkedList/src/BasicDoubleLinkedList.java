@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.ListIterator;
+import java.util.NoSuchElementException;
 
 public class BasicDoubleLinkedList<T> implements Iterable<T>{
 
@@ -25,9 +26,7 @@ public class BasicDoubleLinkedList<T> implements Iterable<T>{
 	public void addToEnd(T data) {
 		Node temp = new Node(data);
 		if (head == null) {
-			head = temp;
-			tail = temp;
-			size = 1;
+			addToFront(data);
 			return;
 		}
 		tail.next = temp;
@@ -65,7 +64,6 @@ public class BasicDoubleLinkedList<T> implements Iterable<T>{
 			return null;
 		Node current_node = head;
 		while (current_node != null) {
-			System.out.println(current_node.data + " / " + data + " " + comparator.compare(current_node.data, data));
 			if (comparator.compare(current_node.data, data) == 0) {
 				remove(current_node);
 				break;
@@ -99,7 +97,7 @@ public class BasicDoubleLinkedList<T> implements Iterable<T>{
 
 	@Override
 	public ListIterator<T> iterator() {
-		return new DoubleLinkedListIterator<T>();
+		return new DoubleLinkedListIterator();
 	}
 
 	protected class Node {
@@ -113,30 +111,50 @@ public class BasicDoubleLinkedList<T> implements Iterable<T>{
 
 	}
 
-	protected class DoubleLinkedListIterator<T> implements ListIterator<T> {
+	protected class DoubleLinkedListIterator implements ListIterator<T> {
 
+		Node previous;
+		Node current;
+		Node next;
+		
+		public DoubleLinkedListIterator() {
+			current = head;
+			if (head != null) {
+				previous = head.prev;
+				next = head.next;
+			}
+		}
+		
 		@Override
 		public T next() {
-			// TODO Auto-generated method stub
-			return null;
+			if (!hasNext())
+				throw new NoSuchElementException();
+			previous = current;
+			current = next;
+			next = (current != null) ? current.next : null;
+
+			return previous.data; // The cursor jumps over the NOW previous item
 		}
 
 		@Override
 		public T previous() {
-			// TODO Auto-generated method stub
-			return null;
+			if (!hasPrevious())
+				throw new NoSuchElementException();
+			next = current;
+			current = previous;
+			previous = (current != null) ? current.prev : null;
+			
+			return current.data; // The cursor jumps backwards over the NOW current item
 		}
 
 		@Override
 		public boolean hasNext() {
-			// TODO Auto-generated method stub
-			return false;
+			return next != null || (next == null && current != null);
 		}
 
 		@Override
 		public boolean hasPrevious() {
-			// TODO Auto-generated method stub
-			return false;
+			return previous != null;
 		}
 
 		@Override
