@@ -8,6 +8,10 @@ public class SortedDoubleLinkedList<T> extends BasicDoubleLinkedList<T>{
 		this.comparator = comparator;
 	}
 
+	/**
+	 * Adds element to the list in the position sorted according to the assigned comparator and updated the size of the list
+	 * @param data Data to add to the list
+	 */	
 	public void add(T data) {
 		Node temp = new Node(data);
 		size++;
