@@ -36,20 +36,24 @@ public class BasicDoubleLinkedList<T> implements Iterable<T>{
 		return size;
 	}
 
+	protected void remove(Node node) {
+		if (node == head)
+			head = node.next;
+		if (node == tail)
+			tail = node.prev;
+		if (node.next != null)
+			node.next.prev = node.prev;
+		if (node.prev != null)
+			node.prev.next = node.next;
+	}
+	
 	public Node remove(T data, Comparator<T> comparator) {
 		if (head == null)
 			return null;
 		Node current_node = head;
 		while (current_node != null) {
 			if (comparator.compare(current_node.data, data) == 0) {
-				if (current_node == head)
-					head = current_node.next;
-				if (current_node == tail)
-					tail = current_node.prev;
-				if (current_node.next != null)
-					current_node.next.prev = current_node.prev;
-				if (current_node.prev != null)
-					current_node.prev.next = current_node.next;
+				remove(current_node);
 				break;
 			}
 			current_node = current_node.next;
