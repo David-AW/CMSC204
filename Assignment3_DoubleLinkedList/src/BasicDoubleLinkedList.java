@@ -10,6 +10,12 @@ public class BasicDoubleLinkedList<T> implements Iterable<T>{
 
 	public void addToFront(T data) {
 		Node temp = new Node(data);
+		if (head == null) {
+			head = temp;
+			tail = temp;
+			size = 1;
+			return;
+		}
 		temp.next = head;
 		head.prev = temp;
 		head = temp;
@@ -18,6 +24,12 @@ public class BasicDoubleLinkedList<T> implements Iterable<T>{
 	
 	public void addToEnd(T data) {
 		Node temp = new Node(data);
+		if (head == null) {
+			head = temp;
+			tail = temp;
+			size = 1;
+			return;
+		}
 		tail.next = temp;
 		temp.prev = tail;
 		tail = temp;
@@ -45,6 +57,7 @@ public class BasicDoubleLinkedList<T> implements Iterable<T>{
 			node.next.prev = node.prev;
 		if (node.prev != null)
 			node.prev.next = node.next;
+		size--;
 	}
 	
 	public Node remove(T data, Comparator<T> comparator) {
@@ -52,6 +65,7 @@ public class BasicDoubleLinkedList<T> implements Iterable<T>{
 			return null;
 		Node current_node = head;
 		while (current_node != null) {
+			System.out.println(current_node.data + " / " + data + " " + comparator.compare(current_node.data, data));
 			if (comparator.compare(current_node.data, data) == 0) {
 				remove(current_node);
 				break;
@@ -62,15 +76,25 @@ public class BasicDoubleLinkedList<T> implements Iterable<T>{
 	}
 
 	public T retrieveFirstElement() {
-		return null;
+		T temp = head.data;
+		remove(head);
+		return temp;
 	}
 
 	public T retrieveLastElement() {
-		return null;
+		T temp = tail.data;
+		remove(tail);
+		return temp;
 	}
 
 	public ArrayList<T> toArrayList() {
-		return null;
+		ArrayList<T> array = new ArrayList<T>();
+		Node current_node = head;
+		while (current_node != null) {
+			
+			current_node = current_node.next;
+		}
+		return array;
 	}
 
 	@Override
