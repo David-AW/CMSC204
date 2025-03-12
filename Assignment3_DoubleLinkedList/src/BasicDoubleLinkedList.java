@@ -155,48 +155,41 @@ public class BasicDoubleLinkedList<T> implements Iterable<T>{
 
 	protected class DoubleLinkedListIterator implements ListIterator<T> {
 
-		Node previous;
-		Node current;
-		Node next;
+		Node current;	
 		
 		public DoubleLinkedListIterator() {
 			current = head;
-			if (head != null) {
-				previous = head.prev;
-				next = head.next;
-			}
 		}
 		
 		@Override
 		public T next() {
 			if (!hasNext())
 				throw new NoSuchElementException();
-			previous = current;
-			current = next;
-			next = (current != null) ? current.next : null;
-
-			return previous.data; // The cursor jumps over the NOW previous item
+			T temp = current.data;
+			current = current.next;
+			return temp; // The cursor jumps over the now previous item
 		}
 
 		@Override
 		public T previous() {
 			if (!hasPrevious())
 				throw new NoSuchElementException();
-			next = current;
-			current = previous;
-			previous = (current != null) ? current.prev : null;
-			
-			return current.data; // The cursor jumps backwards over the NOW current item
+			if (current == null) {
+				current = tail;
+			}else {
+				current = current.prev;
+			}
+			return current.data; // The cursor jumped backwards over the current item
 		}
 
 		@Override
 		public boolean hasNext() {
-			return next != null || (next == null && current != null);
+			return current != null;
 		}
 
 		@Override
 		public boolean hasPrevious() {
-			return previous != null;
+			return (current == null && size > 0) || current.prev != null;
 		}
 
 		/**
