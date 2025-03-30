@@ -72,7 +72,7 @@ public class SortedDoubleLinkedList<T> extends BasicDoubleLinkedList<T>{
 	 */
 	@Override
 	public void addToFront(T data) {
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException("Invalid operation for sorted list");
 	}
 	
 	/**
@@ -81,7 +81,7 @@ public class SortedDoubleLinkedList<T> extends BasicDoubleLinkedList<T>{
 	 */
 	@Override
 	public void addToEnd(T data) {
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException("Invalid operation for sorted list");
 	}
 	
 }
