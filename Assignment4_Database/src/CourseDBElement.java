@@ -33,9 +33,30 @@ public final class CourseDBElement implements Comparable<CourseDBElement>{
 	}
 
 	@Override
-	public int compareTo(CourseDBElement element) {
-		
-		return 0;
+	public int compareTo(CourseDBElement other) {
+		if (this.course_id == other.course_id)
+			return this.crn - other.crn;
+		return this.course_id.compareTo(other.course_id);
+	}
+	
+	@Override
+	public int hashCode() {
+		return Integer.toString(crn).hashCode();
+	}
+	
+	@Override
+	public String toString() {
+		return "\nCourse:" + course_id + " CRN:" + crn + " Credits:" + credits + " Instructor:" + instructor + " Room:" + room_num;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof CourseDBElement) {
+			CourseDBElement other = (CourseDBElement) obj;
+			return this.course_id.equals(other.course_id) && this.room_num.equals(other.room_num) 
+					&& this.instructor.equals(other.instructor) && this.crn == other.crn && this.credits == other.credits;
+		}
+		return false;
 	}
 
 }
