@@ -3,17 +3,20 @@ import java.util.ArrayList;
 
 public class CourseDBStructure implements CourseDBStructureInterface{
 
-	private CourseNode[] table;
+	private CourseNode[] table; // Essentially an array of tail nodes from what is theoretically linked lists
+	private int initial_prime, storage_count;
 	
 	public CourseDBStructure(int n) {
-		table = new CourseNode[getNearestPrimeGreaterThan(n)];
+		initial_prime = getNearestPrimeGreaterThan(n);
+		table = new CourseNode[initial_prime];
 	}
 	
 	public CourseDBStructure(String string, int n) {
 		table = new CourseNode[n];
+		initial_prime = getNearestPrimeGreaterThan(n);
 	}
 
-	public void resize(int n) {
+	private void resize(int n) {
 		CourseDBStructure temp = new CourseDBStructure(n);
 		for (int i = 0; i < table.length; i++) {
 			CourseNode current = table[i];
@@ -41,7 +44,7 @@ public class CourseDBStructure implements CourseDBStructureInterface{
 			return false;
 		int i = 2;
 		while (i*i <= num) {
-			if (num % i == 0) // if the number is evenly divisible by i then it's not prime
+			if (num % i == 0)
 				return false;
 			i++;
 		}
@@ -54,6 +57,10 @@ public class CourseDBStructure implements CourseDBStructureInterface{
 	
 	@Override
 	public void add(CourseDBElement element) {
+		int current_load = (storage_count + 1) * 2 / 3;
+		if (current_load >= initial_prime)
+			resize(storage_count*2); // Double the size of the hash table
+		
 		int hash = getHashCode(element.getCRN());
 		
 		if (table[hash] == null) {
@@ -72,8 +79,10 @@ public class CourseDBStructure implements CourseDBStructureInterface{
 				current = current.prev;
 			}
 		}catch(IOException e) {
-			table[hash] = table[hash].addAndReturnNext(element);
+			table[hash] = table[hash].addAndReturn(element); // Create a node for this element and add it as the tail
 		}
+		
+		storage_count++;
 	}
 
 	@Override
@@ -113,7 +122,7 @@ public class CourseDBStructure implements CourseDBStructureInterface{
 			this.course = course;
 		}
 		
-		public CourseNode addAndReturnNext(CourseDBElement course) {
+		public CourseNode addAndReturn(CourseDBElement course) {
 			CourseNode temp = new CourseNode(course);
 			temp.prev = this;
 			return temp;
