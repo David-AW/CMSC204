@@ -16,6 +16,10 @@ public class CourseDBStructure implements CourseDBStructureInterface{
 		initial_prime = getNearestPrimeGreaterThan(n);
 	}
 
+	/**
+	 * Resizes the table to the nearest prime of the load factor of parameter n/1.5
+	 * @param n estimated number of courses
+	 */
 	private void resize(int n) {
 		CourseDBStructure temp = new CourseDBStructure(n);
 		for (int i = 0; i < table.length; i++) {
@@ -29,6 +33,11 @@ public class CourseDBStructure implements CourseDBStructureInterface{
 		temp = null;
 	}
 	
+	/**
+	 * Finds the nearest 4K+3 prime larger than n
+	 * @param n number to find the closest prime to
+	 * @return the nearest 4K+3 prime larger than n
+	 */
 	private int getNearestPrimeGreaterThan(int n) {
 		int load_factor = n*2/3; // Same as n divided by 1.5 without converting to double
 		int K = 1;
@@ -39,12 +48,17 @@ public class CourseDBStructure implements CourseDBStructureInterface{
 		return prime;
 	}
 	
+	/**
+	 * Exhaust the list of integers from 2 to (int)sqrt(num)+1, if nothing is divisible in that range then the number is prime
+	 * @param num number to check for prime
+	 * @return true if prime, false if not
+	 */
 	private boolean isPrime(int num) {
 		if (num <= 1)
 			return false;
 		int i = 2;
 		while (i*i <= num) {
-			if (num % i == 0)
+			if (num % i == 0) // Found something divisible, so not prime.
 				return false;
 			i++;
 		}
@@ -122,6 +136,11 @@ public class CourseDBStructure implements CourseDBStructureInterface{
 			this.course = course;
 		}
 		
+		/**
+		 * Adds a new node containing the course element to the tail of this linked list, then returns the new tail to be assigned to the hash table.
+		 * @param course course to be added
+		 * @return new tail node of the linked list.
+		 */
 		public CourseNode addAndReturn(CourseDBElement course) {
 			CourseNode temp = new CourseNode(course);
 			temp.prev = this;
