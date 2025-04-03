@@ -61,6 +61,12 @@ public class CourseDBManager implements CourseDBManagerInterface {
 		}
 	}
 
+	/**
+	 * Parses a line of text in the format [Course ID] [CRN] [Credits] [Room Number] [Instructors Name] into a CourseDBElement
+	 * @param line text to parse
+	 * @return CourseDBElement object containing information from the line of text
+	 * @throws IndexOutOfBoundsException if the file does not exist
+	 */
 	private CourseDBElement parseLine(String line) throws IndexOutOfBoundsException{
 		String[] tokens = line.trim().split(" ");
 		int i = tokens.length - 1;
