@@ -79,6 +79,7 @@ public class CourseDBStructure implements CourseDBStructureInterface{
 		
 		if (table[hash] == null) {
 			table[hash] = new CourseNode(element);
+			storage_count++;
 			return;
 		}
 		
