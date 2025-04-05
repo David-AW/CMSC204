@@ -68,11 +68,10 @@ public class MorseCodeTree implements LinkedConverterTreeInterface<String>{
 		
 		boolean looking_left = true;
 		for (char c : structure.toCharArray()) {
-			
 			if (c == '/') {
 				if (looking_left)
 					looking_left = false;
-				else
+				else if (!left_nodes.isEmpty())
 					node = left_nodes.pop();
 				continue;
 			}
@@ -83,6 +82,7 @@ public class MorseCodeTree implements LinkedConverterTreeInterface<String>{
 				node = node.left;
 			}else {
 				node.right = nodes[c-offset];
+				node = node.right;
 				looking_left = true;
 			}
 		}
@@ -90,14 +90,18 @@ public class MorseCodeTree implements LinkedConverterTreeInterface<String>{
 
 	@Override
 	public ArrayList<String> toArrayList() {
-		
-		return null;
+		ArrayList<String> nodes = new ArrayList<String>();
+		LNRoutputTraversal(root, nodes);
+		return nodes;
 	}
 
 	@Override
 	public void LNRoutputTraversal(TreeNode<String> root, ArrayList<String> list) {
-		
-		
+		if (root.left != null)
+			LNRoutputTraversal(root.left, list);
+		list.add(root.data);
+		if (root.right != null)
+			LNRoutputTraversal(root.right, list);
 	}
 
 }
