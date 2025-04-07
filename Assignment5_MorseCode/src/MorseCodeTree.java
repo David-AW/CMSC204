@@ -64,20 +64,20 @@ public class MorseCodeTree implements LinkedConverterTreeInterface<String>{
 		String structure = "eish//v//uf///arl///wp//j//tndb//x//kc//y//mgz//q//o//";
 		
 		TreeNode<String> node = root;
-		Stack<TreeNode<String>> left_nodes = new Stack<TreeNode<String>>();
+		Stack<TreeNode<String>> prev_nodes = new Stack<TreeNode<String>>();
 		
 		boolean looking_left = true;
 		for (char c : structure.toCharArray()) {
 			if (c == '/') {
 				if (looking_left)
 					looking_left = false;
-				else if (!left_nodes.isEmpty())
-					node = left_nodes.pop();
+				else if (!prev_nodes.isEmpty())
+					node = prev_nodes.pop();
 				continue;
 			}
 			
 			if (looking_left) {
-				left_nodes.add(node);
+				prev_nodes.add(node);
 				node.left = nodes[c-offset];
 				node = node.left;
 			}else {
