@@ -3,6 +3,8 @@ import java.io.FileNotFoundException;
 
 public class MorseCodeConverter {
 
+	private static MorseCodeTree tree = new MorseCodeTree();
+	
 	public static String convertToEnglish(String string) {
 		
 		return null;
@@ -14,7 +16,10 @@ public class MorseCodeConverter {
 	}
 
 	public static String printTree() {
-		return null;
+		String output = "";
+		for (String c : tree.toArrayList())
+			output += c + " ";
+		return output.strip();
 	}
 
 }
