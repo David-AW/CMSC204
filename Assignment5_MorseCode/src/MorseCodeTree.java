@@ -5,6 +5,10 @@ public class MorseCodeTree implements LinkedConverterTreeInterface<String>{
 
 	private TreeNode<String> root;
 	
+	public MorseCodeTree() {
+		buildTree();
+	}
+	
 	@Override
 	public TreeNode<String> getRoot() {
 		return root;
@@ -30,14 +34,16 @@ public class MorseCodeTree implements LinkedConverterTreeInterface<String>{
 
 	@Override
 	public String fetch(String code) {
-		
-		return null;
+		return fetchNode(root, code);
 	}
 
 	@Override
 	public String fetchNode(TreeNode<String> root, String code) {
-		
-		return null;
+		if (code.length() > 0)
+			return root.data;
+		if (code.charAt(0) == '.')
+			return fetchNode(root.left, code.substring(1));
+		return fetchNode(root.right, code.substring(1));
 	}
 
 	@Override
@@ -54,12 +60,7 @@ public class MorseCodeTree implements LinkedConverterTreeInterface<String>{
 
 	@Override
 	public void buildTree() {
-		int offset = 'a'; // 95
 		root = new TreeNode<String>("");
-		TreeNode<String>[] nodes = new TreeNode[26];
-		for (int i = 0; i < 26; i++) {
-			nodes[i] = new TreeNode<String>((char)(i+offset)+"");
-		}
 		
 		String structure = "eish//v//uf///arl///wp//j//tndb//x//kc//y//mgz//q//o//";
 		
@@ -78,10 +79,10 @@ public class MorseCodeTree implements LinkedConverterTreeInterface<String>{
 			
 			if (looking_left) {
 				prev_nodes.add(node);
-				node.left = nodes[c-offset];
+				node.left = new TreeNode<String>(c+"");
 				node = node.left;
 			}else {
-				node.right = nodes[c-offset];
+				node.right = new TreeNode<String>(c+"");
 				node = node.right;
 				looking_left = true;
 			}
