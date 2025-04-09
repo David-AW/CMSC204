@@ -39,7 +39,7 @@ public class MorseCodeTree implements LinkedConverterTreeInterface<String>{
 
 	@Override
 	public String fetchNode(TreeNode<String> root, String code) {
-		if (code.length() > 0)
+		if (code.length() <= 0)
 			return root.data;
 		if (code.charAt(0) == '.')
 			return fetchNode(root.left, code.substring(1));
