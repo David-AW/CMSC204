@@ -15,21 +15,36 @@ public class MorseCodeTree implements LinkedConverterTreeInterface<String>{
 	}
 
 	@Override
-	public void setRoot(TreeNode<String> newNode) {
-		
-		
+	public void setRoot(TreeNode<String> new_node) {
+		new_node.left = root.left;
+		new_node.right = root.right;
+		root = new_node;
 	}
 
 	@Override
 	public void insert(String code, String result) {
-		
-		
+		addNode(root, code, result);
 	}
 
 	@Override
 	public void addNode(TreeNode<String> root, String code, String letter) {
-		
-		
+		if (code.charAt(0) == '.') {
+			if (root.left == null && code.length() > 1)
+				root.left = new TreeNode<String>("");
+			if (code.length() <= 1) {
+				root.left = new TreeNode<String>(letter);
+				return;
+			}
+			addNode(root.left, code.substring(1), letter);
+		}else {
+			if (root.right == null && code.length() > 1)
+				root.right = new TreeNode<String>("");
+			if (code.length() <= 1) {
+				root.right = new TreeNode<String>(letter);
+				return;
+			}
+			addNode(root.right, code.substring(1), letter);
+		}
 	}
 
 	@Override
@@ -48,14 +63,12 @@ public class MorseCodeTree implements LinkedConverterTreeInterface<String>{
 
 	@Override
 	public LinkedConverterTreeInterface<String> delete(String data) throws UnsupportedOperationException {
-		
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public LinkedConverterTreeInterface<String> update() throws UnsupportedOperationException {
-		
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
