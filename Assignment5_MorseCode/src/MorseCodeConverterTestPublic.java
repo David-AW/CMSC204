@@ -41,6 +41,7 @@ public class MorseCodeConverterTestPublic {
 		assertEquals("the quick brown fox jumps over the lazy dog", converter1);
 
 	}
+	
 	@Test
 	public void testConvertMorseFileToEnglishString() {	
 		
@@ -55,5 +56,20 @@ public class MorseCodeConverterTestPublic {
 		}
 	}
 	
+	@Test
+	public void testConvertToEnglishStringStudent() {
+		String test = MorseCodeConverter.convertToEnglish("- .... .. ... / .. ... / .- / .--- ..- -. .. - / - . ... -");
+		assertEquals("this is a junit test", test);
+	}
 
+	@Test
+	public void testConvertToEnglishFileStudent() {
+		File file = new File("src/dylanthomas.txt");
+		try {
+			assertEquals("do not go gentle into that good night", MorseCodeConverter.convertToEnglish(file));
+		} catch (FileNotFoundException e) {
+			assertTrue("An unwanted exception was caught", false);
+		}
+	}
+	
 }
