@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map.Entry;
 import java.util.Set;
 
 public class Graph implements GraphInterface<Town, Road>{
@@ -8,7 +10,6 @@ public class Graph implements GraphInterface<Town, Road>{
 	
 	public Graph() {
 		map = new HashMap<Town, HashMap<Town, Road>>();
-		
 	}
 	
 	@Override
@@ -50,14 +51,22 @@ public class Graph implements GraphInterface<Town, Road>{
 
 	@Override
 	public Set<Road> edgeSet() {
-		// TODO Auto-generated method stub
-		return null;
+		Set<Road> roads = new HashSet<Road>();
+		for (Town vertex : map.keySet()) {
+			for (Entry<Town, Road> entry : map.get(vertex).entrySet()) {
+				roads.add(entry.getValue());
+			}
+		}
+		return roads;
 	}
 
 	@Override
 	public Set<Road> edgesOf(Town vertex) {
-		// TODO Auto-generated method stub
-		return null;
+		Set<Road> roads = new HashSet<Road>();
+		for (Entry<Town, Road> entry : map.get(vertex).entrySet()) {
+			roads.add(entry.getValue());
+		}
+		return roads;
 	}
 
 	@Override
@@ -91,8 +100,7 @@ public class Graph implements GraphInterface<Town, Road>{
 
 	@Override
 	public Set<Town> vertexSet() {
-		// TODO Auto-generated method stub
-		return null;
+		return map.keySet();
 	}
 
 	@Override
