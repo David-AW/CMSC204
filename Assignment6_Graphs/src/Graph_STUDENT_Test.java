@@ -5,16 +5,16 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 
 public class Graph_STUDENT_Test {
 
 	private GraphInterface<Town, Road> graph;
 	private Town[] city;
 
-	@BeforeEach
+	@Before
 	public void setUp() throws Exception {
 		graph = new Graph();
 		city = new Town[7];
@@ -34,7 +34,7 @@ public class Graph_STUDENT_Test {
 		graph.addEdge(city[3], city[6], 5, "DG");
 	}
 
-	@AfterEach
+	@After
 	public void tearDown() throws Exception {
 		graph = null;
 	}
