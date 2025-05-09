@@ -28,13 +28,22 @@ public final class Road implements Comparable<Road>{
 		return weight;
 	}
 	
+	public boolean contains(Town town) {
+		return this.a.equals(town) || this.b.equals(town);
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Road) {
 			Road other = (Road) obj;
-			return this.a.equals(other.a) && this.b.equals(other.b) && this.name.equals(other.name) && this.weight == other.weight;
+			return contains(other.a) && contains(other.b) && this.name.equals(other.name) && this.weight == other.weight;
 		}
 		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return (a.hashCode() + b.hashCode()) / weight + name.hashCode();
 	}
 
 	@Override

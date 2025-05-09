@@ -101,9 +101,13 @@ public class Graph implements GraphInterface<Town, Road>{
 		if (!map.containsKey(v))
 			return false;
 		for (Town vertex : map.keySet()) {
+			Set<Town> garbage = new HashSet<Town>();
 			for (Town endpoint : map.get(vertex).keySet())
-				if(endpoint.equals(v))
-					map.get(vertex).remove(endpoint);
+				if(map.get(vertex).get(endpoint).contains(v))
+					garbage.add(endpoint);
+			for (Town delete_this : garbage) {
+				map.get(vertex).remove(delete_this);
+			}
 		}
 		map.remove(v);
 		return true;
