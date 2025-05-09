@@ -1,5 +1,5 @@
 
-public final class Town {
+public final class Town implements Comparable<Town> {
 
 	private final String name;
 	
@@ -28,6 +28,11 @@ public final class Town {
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	@Override
+	public int compareTo(Town o) {
+		return this.getName().compareTo(o.getName());
 	}
 
 }

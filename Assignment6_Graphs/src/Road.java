@@ -1,5 +1,5 @@
 
-public final class Road {
+public final class Road implements Comparable<Road>{
 	
 	private final String name;
 	private final Town a, b;
@@ -35,6 +35,11 @@ public final class Road {
 			return this.a.equals(other.a) && this.b.equals(other.b) && this.name.equals(other.name) && this.weight == other.weight;
 		}
 		return false;
+	}
+
+	@Override
+	public int compareTo(Road o) {
+		return this.getName().compareTo(o.getName());
 	}
 	
 }

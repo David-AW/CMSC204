@@ -26,10 +26,11 @@ public class Graph implements GraphInterface<Town, Road>{
 
 	@Override
 	public Road addEdge(Town source, Town destination, int weight, String description) {
-		addVertex(source);
-		addVertex(destination);
+		if (!containsVertex(source) || !containsVertex(destination))
+			throw new IllegalArgumentException();
 		Road edge =  new Road(source, destination, weight, description);
 		map.get(source).put(destination, edge);
+		map.get(destination).put(source, edge);
 		return edge;
 	}
 
@@ -116,6 +117,7 @@ public class Graph implements GraphInterface<Town, Road>{
 	@Override
 	public ArrayList<String> shortestPath(Town source, Town destination) {
 		dijkstraShortestPath(source);
+		
 		LinkedList<Town> path = new Path(destination, shortest_path.get(destination)).add(destination).vertices;
 		ArrayList<String> output = new ArrayList<String>();
 
@@ -130,7 +132,7 @@ public class Graph implements GraphInterface<Town, Road>{
 		return output;
 	}
 	
-	private Path getShortestPathSoFar(Set<Entry<Town, Path>> paths) {
+	private Path getShortestPathInGroup(Set<Entry<Town, Path>> paths) {
 		Path shortest = null;
 		int lowest_distance = Integer.MAX_VALUE;
 		for (Entry<Town, Path> path : paths) {
@@ -151,7 +153,7 @@ public class Graph implements GraphInterface<Town, Road>{
 		unresolved.get(source).distance = 0;
 		
 	    while (!unresolved.isEmpty()) {
-	        Path path = getShortestPathSoFar(unresolved.entrySet());
+	        Path path = getShortestPathInGroup(unresolved.entrySet());
 	        unresolved.remove(path.vertex);
 	        
 	        for (Entry<Town, Road> adjacent : map.get(path.vertex).entrySet()) {
@@ -180,6 +182,8 @@ public class Graph implements GraphInterface<Town, Road>{
 		public Path(Town vertex, Path copy) {
 			this(vertex);
 			vertices = new LinkedList<Town>();
+			if (copy == null)
+				return;
 			for (Town t : copy.vertices)
 				vertices.add(t);
 			this.distance = copy.distance;
