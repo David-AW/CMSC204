@@ -49,9 +49,9 @@ public class Graph_STUDENT_Test {
 	@Test
 	public void testAddEdge() {
 		assertFalse(graph.containsEdge(city[1], city[4]));
-		graph.addEdge(city[1], city[4], 7, "BE Crossing");
+		graph.addEdge(city[1], city[4], 7, "BE");
 		assertTrue(graph.containsEdge(city[1], city[4]));
-		assertEquals(new Road(city[1], city[4], 7, "BE Crossing"), graph.getEdge(city[1], city[4]));
+		assertEquals(new Road(city[1], city[4], 7, "BE"), graph.getEdge(city[1], city[4]));
 	}
 
 	@Test

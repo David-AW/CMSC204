@@ -43,10 +43,10 @@ public class TownGraphManager_STUDENT_Test {
 		assertEquals(8, roads.size());
 		assertTrue(roads.contains("AB"));
 		assertTrue(roads.contains("AC"));
-		graph.addRoad(town[5], town[6], 2, "Trail FG");
+		graph.addRoad(town[5], town[6], 2, "FG");
 		roads = graph.allRoads();
 		assertEquals(9, roads.size());
-		assertTrue(roads.contains("Trail FG"));
+		assertTrue(roads.contains("FG"));
 	}
 
 	@Test
